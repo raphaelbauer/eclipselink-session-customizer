@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.zalando.jpa</groupId>
 		<artifactId>eclipselink-session-customizer-parent</artifactId>
-		<version>0.9.1-SNAPSHOT</version>
+		<version>0.9.1</version>
 	</parent>
 	<artifactId>eclipselink-session-customizer</artifactId>
 
