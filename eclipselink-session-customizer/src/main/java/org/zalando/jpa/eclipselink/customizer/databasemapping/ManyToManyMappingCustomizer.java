@@ -20,6 +20,7 @@ import java.lang.reflect.Field;
 import java.util.Vector;
 
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import org.eclipse.persistence.descriptors.RelationalDescriptor;
 import org.eclipse.persistence.internal.helper.DatabaseField;
@@ -30,7 +31,6 @@ import org.eclipse.persistence.sessions.Session;
 import org.zalando.jpa.eclipselink.customizer.NameUtils;
 
 /**
- * ASA-54.
  *
  * @author  jbellmann
  */
@@ -57,10 +57,18 @@ public class ManyToManyMappingCustomizer extends AbstractColumnNameCustomizer<Ma
 
         // wenn eine JoinTable via annotation deklariert mit wurde, und 'name' nicht leer ist machen wir nichts
         try {
-            Field attributeField = javaClazz.getDeclaredField(attributeName);
+            final Field attributeField = javaClazz.getDeclaredField(attributeName);
+            final ManyToMany manyToManyAnnotation = attributeField.getAnnotation(ManyToMany.class);
+            final String mappedBy = manyToManyAnnotation.mappedBy();
+            if(!mappedBy.trim().isEmpty()){
+            	
+            	//skip processing
+            	return;
+            }
+            
             if (attributeField.isAnnotationPresent(JoinTable.class)) {
-                JoinTable joinTableAnnotation = attributeField.getAnnotation(JoinTable.class);
-                String name = joinTableAnnotation.name();
+                final JoinTable joinTableAnnotation = attributeField.getAnnotation(JoinTable.class);
+                final String name = joinTableAnnotation.name();
                 if (!name.trim().isEmpty()) {
 
                     // skip processing here
@@ -95,7 +103,6 @@ public class ManyToManyMappingCustomizer extends AbstractColumnNameCustomizer<Ma
         for (DatabaseField field : sourcekeyFields) {
             String fieldName = field.getName();
             field.setName(fieldName.toLowerCase());
-// System.out.println(field.getName());
         }
 
         // sourceRelationKeyField zum beispiel : deploymentset_projects.DeploymentSet_ID
@@ -113,7 +120,6 @@ public class ManyToManyMappingCustomizer extends AbstractColumnNameCustomizer<Ma
                                                      .append(NameUtils.camelCaseToUnderscore(fieldName)).append("_")
                                                      .append("id").toString();
             field.setName(newFieldName);
-// System.out.println(field.getName());
         }
 
         // targetKeyField zum beispiel : project.p_id
@@ -122,7 +128,6 @@ public class ManyToManyMappingCustomizer extends AbstractColumnNameCustomizer<Ma
         for (DatabaseField field : targetKeyFields) {
             String fieldName = field.getName();
             field.setName(fieldName.toLowerCase());
-// System.out.println(field.getName());
         }
 
         // targetRelationKeyField zum Beispiel deploymentset_projects.projects_ID
@@ -140,7 +145,6 @@ public class ManyToManyMappingCustomizer extends AbstractColumnNameCustomizer<Ma
                                                              referenceClazz.getSimpleName())).append("_").append("id")
                                                      .toString();
             field.setName(newFieldName);
-// System.out.println(field.getName());
         }
 
     }
