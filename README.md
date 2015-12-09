@@ -1,6 +1,6 @@
 ##WORK IN PROGRESS
 
-[![Build Status](https://travis-ci.org/zalando-stups/swagger-codegen-tooling.svg?branch=master)](https://travis-ci.org/zalando-stups/swagger-codegen-tooling)
+[![Build Status](https://travis-ci.org/zalando/eclipselink-session-customizer.svg?branch=master)](https://travis-ci.org/zalando/eclipselink-session-customizer)
 
 ###Build
 
