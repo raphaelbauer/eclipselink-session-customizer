@@ -38,4 +38,30 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<inherited>false</inherited>
+				<configuration>
+					<breakiterator>true</breakiterator>
+					<header>${project.name}</header>
+					<source>${source.level}</source>
+					<quiet>true</quiet>
+					<links>
+						<link>http://docs.oracle.com/javase/7/docs/api</link>
+					</links>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<scm>
+		<connection>scm:git:https://github.com/zalando/eclipselink-session-customizer.git</connection>
+		<developerConnection>scm:git:https://github.com/zalando/eclipselink-session-customizer.git</developerConnection>
+		<url>https://github.com/zalando/eclipselink-session-customizer</url>
+		<tag>HEAD</tag>
+	</scm>
 </project>
