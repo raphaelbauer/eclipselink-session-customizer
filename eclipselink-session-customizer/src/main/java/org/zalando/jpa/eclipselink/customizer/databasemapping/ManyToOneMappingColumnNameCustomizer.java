@@ -41,7 +41,7 @@ public class ManyToOneMappingColumnNameCustomizer extends AbstractColumnNameCust
 
         logDatabaseMapping(databaseMapping, session);
 
-        EntityFieldInspector<?> entityFieldInspector = new JoinColumnFieldInspector(super.getFieldInspector(
+        EntityFieldInspector<?> entityFieldInspector = new JoinColumnFieldInspector(FieldInspector.getFieldInspector(
                     databaseMapping).getField());
         for (final DatabaseField foreignKeyField : databaseMapping.getForeignKeyFields()) {
             String prefix = NameUtils.iconizeTableName(tableName) + "_";

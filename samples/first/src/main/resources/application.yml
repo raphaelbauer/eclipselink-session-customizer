@@ -1,0 +1,27 @@
+spring:
+    datasource:
+        platform: h2
+    jpa:
+        properties:
+            transaction-type: RESOURCE_LOCAL
+            eclipselink.session.customizer: org.zalando.jpa.eclipselink.customizer.session.DefaultSessionCustomizer
+            # defined in org.eclipse.persistence.config.PersistenceUnitProperties
+            eclipselink.persistence-context.flush-mode: COMMIT
+            eclipselink.weaving: false
+            eclipselink.ddl-generation.output-mode: both
+            eclipselink.ddl-generation: create-tables
+            eclipselink.application-location: target/
+            # eclipselink.logging.logger: com.yourcompany.jpa.eclipselink.Slf4jSessionLog
+            # eclipselink.logging.file: eclipse-link-output.log
+            eclipselink.logging.timestamp: false
+            eclipselink.logging.session: false
+            eclipselink.logging.connection: false
+            eclipselink.logging.thread: false
+            eclipselink.logging.level.transaction: ALL
+            eclipselink.logging.level.sql: FINE
+            eclipselink.logging.level.event: ALL
+            eclipselink.logging.level.connection: ALL
+            eclipselink.logging.level.query: FINE
+            eclipselink.logging.level.cache: ALL
+            eclipselink.logging.level: ALL
+            eclipselink.logging.parameters: true

@@ -63,6 +63,10 @@ public class ManyToOneMappingColumnNameCustomizerTest {
 
         // does not have the needed prefix
         Mockito.when(dataBaseField.getName()).thenReturn("order_status");
+        Mockito.when(mapping.getAttributeName()).thenReturn("orderStatus");
+        ClassDescriptor descriptor = Mockito.mock(ClassDescriptor.class);
+        Mockito.when(mapping.getDescriptor()).thenReturn(descriptor);
+        Mockito.when(descriptor.getJavaClass()).thenReturn(AttributeHolderBean.class);
 
         //
         customizer.customizeColumnName("purchase_order_head", mapping, MockSessionCreator.create());
@@ -74,12 +78,17 @@ public class ManyToOneMappingColumnNameCustomizerTest {
     /**
      * {@link DatabaseField#setName(String)} should not be invoked, because the field-name is prefixed correct.
      */
-    @Ignore
+//    @Ignore
     @Test
     public void testCustomizeWhenFieldStartsWithPrefix() {
 
         // prefix the fieldname
         Mockito.when(dataBaseField.getName()).thenReturn("poh_order_status_id");
+        Mockito.when(mapping.getAttributeName()).thenReturn("orderStatusId");
+        ClassDescriptor descriptor = Mockito.mock(ClassDescriptor.class);
+        Mockito.when(mapping.getDescriptor()).thenReturn(descriptor);
+        Mockito.when(descriptor.getJavaClass()).thenReturn(AttributeHolderBean.class);
+        
 
         //
         customizer.customizeColumnName("purchase_order_head", mapping, MockSessionCreator.create());

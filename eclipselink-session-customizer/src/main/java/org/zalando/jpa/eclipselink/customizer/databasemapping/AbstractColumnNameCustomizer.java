@@ -15,24 +15,17 @@
  */
 package org.zalando.jpa.eclipselink.customizer.databasemapping;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.mappings.ManyToOneMapping;
 import org.eclipse.persistence.sessions.Session;
-import org.reflections.ReflectionUtils;
 import org.zalando.jpa.eclipselink.LogSupport;
-import org.zalando.jpa.eclipselink.customizer.databasemapping.support.ColumnFieldInspector;
 import org.zalando.jpa.eclipselink.customizer.databasemapping.support.DatabaseMappingLogger;
 import org.zalando.jpa.eclipselink.customizer.databasemapping.support.DirectToFieldMappingLogger;
-import org.zalando.jpa.eclipselink.customizer.databasemapping.support.EntityFieldInspector;
 import org.zalando.jpa.eclipselink.customizer.databasemapping.support.ManyToOneMappingLogger;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 /**
@@ -66,16 +59,16 @@ public abstract class AbstractColumnNameCustomizer<T extends DatabaseMapping> ex
         }
     }
 
-    protected EntityFieldInspector<? extends Annotation> getFieldInspector(final DatabaseMapping databaseMapping) {
-        final String attributeName = databaseMapping.getAttributeName();
-        final Class<?> entityClass = databaseMapping.getDescriptor().getJavaClass();
-
-        
-        Set<Field> fieldsWithName = ReflectionUtils.getFields(entityClass, ReflectionUtils.withName(attributeName));
-        
-        final Field field = Iterables.get(fieldsWithName, 0);
-//        final Field field = ReflectionUtils.findField(entityClass, attributeName);
-        return new ColumnFieldInspector(field);
-    }
+//    protected EntityFieldInspector<? extends Annotation> getFieldInspector(final DatabaseMapping databaseMapping) {
+//        final String attributeName = databaseMapping.getAttributeName();
+//        final Class<?> entityClass = databaseMapping.getDescriptor().getJavaClass();
+//
+//        
+//        Set<Field> fieldsWithName = ReflectionUtils.getAllFields(entityClass, ReflectionUtils.withName(attributeName));
+//        
+//        final Field field = Iterables.get(fieldsWithName, 0);
+////        final Field field = ReflectionUtils.findField(entityClass, attributeName);
+//        return new ColumnFieldInspector(field);
+//    }
 
 }

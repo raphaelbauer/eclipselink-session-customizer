@@ -13,35 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zalando.jpa.eclipselink;
+package org.zalando.jpa.sample.first.entities;
 
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
+import javax.persistence.Entity;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
- * Just for Testing.
+ * 
+ * @author jbellmann
  *
- * @author  jbellmann
  */
-public class AttributeHolderBean {
+@SuppressWarnings("serial")
+@Entity
+public class Person extends AbstractPersistable<Long> {
 
-    private boolean ordered;
+	private String name;
 
-    @Column(name = "is_annotated")
-    private boolean annotated;
+	private String lastname;
 
-    private Status orderStatus;
+	public String getName() {
+		return name;
+	}
 
-    private String fieldWithoutAnnotation;
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    @Column(name = "field_with_annotation")
-    private String fieldwithannotation;
+	public String getLastname() {
+		return lastname;
+	}
 
-    private String brandCode;
-
-    @ManyToOne
-    private String purchaseOrderStatus;
-    
-    private String orderStatusId;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
 
 }

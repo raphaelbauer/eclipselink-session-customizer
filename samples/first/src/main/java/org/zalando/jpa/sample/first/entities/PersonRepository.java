@@ -13,35 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zalando.jpa.eclipselink;
+package org.zalando.jpa.sample.first.entities;
 
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- * Just for Testing.
- *
- * @author  jbellmann
- */
-public class AttributeHolderBean {
-
-    private boolean ordered;
-
-    @Column(name = "is_annotated")
-    private boolean annotated;
-
-    private Status orderStatus;
-
-    private String fieldWithoutAnnotation;
-
-    @Column(name = "field_with_annotation")
-    private String fieldwithannotation;
-
-    private String brandCode;
-
-    @ManyToOne
-    private String purchaseOrderStatus;
-    
-    private String orderStatusId;
-
+public interface PersonRepository extends JpaRepository<Person, Long> {
 }

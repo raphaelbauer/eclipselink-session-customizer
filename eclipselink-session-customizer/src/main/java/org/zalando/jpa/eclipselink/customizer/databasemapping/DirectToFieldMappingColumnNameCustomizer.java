@@ -15,20 +15,14 @@
  */
 package org.zalando.jpa.eclipselink.customizer.databasemapping;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.Set;
 
 import javax.persistence.Column;
 
 import org.eclipse.persistence.mappings.DirectToFieldMapping;
 import org.eclipse.persistence.sessions.Session;
-import org.reflections.ReflectionUtils;
 import org.zalando.jpa.eclipselink.customizer.NameUtils;
-import org.zalando.jpa.eclipselink.customizer.databasemapping.support.ColumnFieldInspector;
 import org.zalando.jpa.eclipselink.customizer.databasemapping.support.EntityFieldInspector;
-
-import com.google.common.collect.Iterables;
 
 /**
  * Supports Column-Name-Customization for DirectToFieldMappings.
@@ -49,7 +43,7 @@ public class DirectToFieldMappingColumnNameCustomizer extends AbstractColumnName
         logDatabaseMapping(databaseMapping, session);
 
         String newFieldName = null;
-        EntityFieldInspector<?> entityFieldInspector = getFieldInspector(databaseMapping);
+        EntityFieldInspector<?> entityFieldInspector = FieldInspector.getFieldInspector(databaseMapping);
         if (shouldCreateBooleanFieldName(entityFieldInspector)) {
 
             newFieldName = NameUtils.buildBooleanFieldName(tableName, databaseMapping.getAttributeName());
@@ -91,16 +85,16 @@ public class DirectToFieldMappingColumnNameCustomizer extends AbstractColumnName
         return result;
     }
 
-    // TODO, check this, we have the same in AbstractColumnNameCustomizer
-    protected EntityFieldInspector<? extends Annotation> getFieldInspector(final DirectToFieldMapping databaseMapping) {
-        final String attributeName = databaseMapping.getAttributeName();
-        final Class<?> entityClass = databaseMapping.getDescriptor().getJavaClass();
-
-        Set<Field> fieldsWithName = ReflectionUtils.getFields(entityClass, ReflectionUtils.withName(attributeName));
-        
-        final Field field = Iterables.get(fieldsWithName, 0);
-//        final Field field = ReflectionUtils.findField(entityClass, attributeName);
-        return new ColumnFieldInspector(field);
-    }
+//    // TODO, check this, we have the same in AbstractColumnNameCustomizer
+//    protected EntityFieldInspector<? extends Annotation> getFieldInspector(final DirectToFieldMapping databaseMapping) {
+//        final String attributeName = databaseMapping.getAttributeName();
+//        final Class<?> entityClass = databaseMapping.getDescriptor().getJavaClass();
+//
+//        Set<Field> fieldsWithName = ReflectionUtils.getAllFields(entityClass, ReflectionUtils.withName(attributeName));
+//        
+//        final Field field = Iterables.get(fieldsWithName, 0);
+////        final Field field = ReflectionUtils.findField(entityClass, attributeName);
+//        return new ColumnFieldInspector(field);
+//    }
 
 }
