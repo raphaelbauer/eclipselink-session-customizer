@@ -32,7 +32,6 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 
-
 		<!-- TESTING -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
