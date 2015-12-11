@@ -16,7 +16,6 @@
 package org.zalando.jpa.eclipselink.customizer.databasemapping;
 
 import java.lang.reflect.Field;
-
 import java.util.Vector;
 
 import javax.persistence.JoinTable;
@@ -56,16 +55,16 @@ public class ManyToManyMappingCustomizer extends AbstractColumnNameCustomizer<Ma
         final Class<?> javaClazz = descriptor.getJavaClass(); // FunctionalGroup
 
         // wenn eine JoinTable via annotation deklariert mit wurde, und 'name' nicht leer ist machen wir nichts
-        try {
-            final Field attributeField = javaClazz.getDeclaredField(attributeName);
-            final ManyToMany manyToManyAnnotation = attributeField.getAnnotation(ManyToMany.class);
-            final String mappedBy = manyToManyAnnotation.mappedBy();
-            if(!mappedBy.trim().isEmpty()){
-            	
-            	//skip processing
-            	return;
-            }
-            
+		try {
+			final Field attributeField = javaClazz.getDeclaredField(attributeName);
+			final ManyToMany manyToManyAnnotation = attributeField.getAnnotation(ManyToMany.class);
+			final String mappedBy = manyToManyAnnotation.mappedBy();
+			if (!mappedBy.trim().isEmpty()) {
+
+				// skip processing
+				return;
+			}
+
             if (attributeField.isAnnotationPresent(JoinTable.class)) {
                 final JoinTable joinTableAnnotation = attributeField.getAnnotation(JoinTable.class);
                 final String name = joinTableAnnotation.name();
