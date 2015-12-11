@@ -16,7 +16,6 @@
 package org.zalando.jpa.eclipselink.customizer.databasemapping;
 
 import java.lang.reflect.Field;
-
 import java.util.Map;
 
 import javax.persistence.Embeddable;
